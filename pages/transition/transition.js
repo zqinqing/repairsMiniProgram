@@ -9,17 +9,16 @@ Page({
 	data: {
 		hintPath: ''  			//页面图片路径
 	},
-
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
 		const than = this;
-		console.log(options, '二维码信息');
+        console.log(options, 'options，返回二维码信息');
 		if (options.scene) {
 			var scene = decodeURIComponent(options.scene);
 			var params = scene.split('_');
-            console.log(params, '二维码参数');
+            // console.log(params, '二维码参数');
 			if (params.length == 2) {
 				if (params[0] == "code") { 		     // 如果二维码里面有 id
 					than.isbindingqr(params[1]);     // 请求并进行判断是否绑定
@@ -31,6 +30,7 @@ Page({
 					})*/
                 }
 			}else if (params.length == 3) {
+                console.log('当有三个参数时，是旧二维码，直接跳转报修页面')
                 wx.redirectTo({// 跳转到报修页面   跳转到报修页面需要携带参数跳转
                     url: '../index/index?school_id=' + params[0] + '&room_id=' + params[1],
                 })

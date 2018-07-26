@@ -15,7 +15,7 @@
             placeholder="请输入您的反馈意见"
             placeholder-style="color: rgba(0, 0, 0, .5);"
             class="textarea"
-            value="{{text}}"
+            bindinput="textareavalue"
         ></textarea>
     </view>
     <view class="img-v clearfix">

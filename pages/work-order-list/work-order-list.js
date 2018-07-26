@@ -26,23 +26,7 @@ Page({
             title: '加载中',
             mask: true,
         })
-        const _this = this;
-        wx.getStorage({
-            key: 'admin',
-            success: function(res) {
-                if (res.errMsg === 'getStorage:ok'){
-                    var data = JSON.parse(res.data);
-                    // console.log(data, '加载本地缓存信息')
-                    var url = 'https://www.' + util.host + '/usr/' + data.userid + '/' + data.session+'/operation/getmyreport';
-                    // console.log(url, '获取请求的url')
-                    _this.getWorkOrderList(url);
-                }
-            },
-            fail: function(res) {
-                console.log(res, "获取本地用户缓存失败!")
-            },
-            complete: function(res) {},
-        })
+        this.getUserInfo(); // 获取用户信息
     },
 
     /**
@@ -96,6 +80,79 @@ Page({
     
     },
     /**
+     * 获取用户信息
+     */
+    getUserInfo: function(){
+        const _this = this;
+        wx.getStorage({
+            key: 'admin',
+            success: function (res) {
+                if (res.errMsg === 'getStorage:ok') {
+                    var data = JSON.parse(res.data);
+                    // console.log(data, '加载本地缓存信息')
+                    var url = 'https://www.' + util.host + '/usr/' + data.userid + '/' + data.session + '/operation/getmyreport';
+                    // console.log(url, '获取请求的url')
+                    _this.getWorkOrderList(url);
+                }
+            },
+            fail: function (res) {
+                console.log(res, "获取本地用户缓存失败!");
+                _this.loginCode();  // 重新登录获取用户信息
+            },
+            complete: function (res) {},
+        })
+    },
+    /**
+     * 登录，获取login code
+     */
+    loginCode: function(){
+        let _this = this;
+        wx.login({
+            success: function(res) {
+                if (res.errMsg === "login:ok"){
+                    // console.log(res, '登录获取code成功!');
+                    _this.getUnionid(res.code);
+                }
+            },
+            fail: function(res) {
+                console.log(res, '登录获取code失败!');
+            },
+            complete: function(res) {},
+        })
+    },
+    /** 
+     * 通过login code 获取用户信息
+     */
+    getUnionid: function(code){
+        let _this = this,
+            url = "https://www." + util.host + "/weixinweb/xiaochengcxulogin/" + code;
+        wx.request({
+            url: url,
+            data: '',
+            header: {},
+            method: 'GET',
+            dataType: 'json',
+            responseType: 'text',
+            success: function(res) {
+                if (res.statusCode === 200){
+                    console.log(data);
+                    let data = JSON.stringify(res.data);
+                    wx.setStorage({  // 缓存管理员用户信息
+                        key: "admin",
+                        data: data,
+                        success: function(res) {
+                            _this.getUserInfo(); // 重新获取列表数据
+                        }
+                    })
+                }
+            },
+            fail: function(res) {
+                console.log(res, '获取unionid失败!');
+            },
+            complete: function(res) {},
+        })
+    },
+    /**
      * 获取工单列表数据
      */
     getWorkOrderList: function(url){
@@ -122,7 +179,6 @@ Page({
                             })
                         }
                     }
-                    
                     setTimeout(function () {
                         wx.hideLoading()
                     }, 300)

@@ -44,8 +44,7 @@ Page({
                             _this.setData({
                                 adminInfo: data
                             })
-                            // console.log(_this.data.adminInfo)
-                            _this.commentroll();       // 判断是否需要评论
+                            // console.log(_this.data.adminInfo);
                             _this.getReportDetails();  // 获取用户获取报修详情
                             _this.getReplyToList();    // 获取用户获取检修回复列表
                             setTimeout(function() {
@@ -142,6 +141,9 @@ Page({
                             datum: response.data.data[0]
                         })
                         // console.log(_this.data.datum, '获取用户获取报修详情成功！');
+                        if (response.data.data[0].status === 2 || response.data.data[0].status === 3){
+                            _this.commentroll();       // 判断是否需要评论
+                        }
                     }
                 },
                 fail: function (res) {
@@ -282,9 +284,9 @@ Page({
                 success: function(response) {
                     if (response.statusCode === 200 && response.data.code === 0){
                         var datum = response.data.data;
-                        // console.log(datum)
+                        console.log(datum)
                         if (datum.length === 0) {
-                            // console.log('需要评论!');
+                            console.log('需要评论!');
                             var commentUrl = '../comment/comment'
                                 + '?userid=' + data.userid
                                 + '&session=' + data.session
@@ -311,12 +313,22 @@ Page({
         }
     },
     /**
-     * 投诉建议
+     * 投诉建议  /usr/:userid/:session/operation/postsuggest
      */
     complaint: function(){
-        wx.navigateTo({
-            url: '../complaint/complaint'
-        })
+        let _this = this,
+            data = _this.data.adminInfo;
+        if (data !== ''){
+            // console.log(data);
+            var url = 'https://www.' + util.host + '/usr/' + data.userid + '/' + data.session + '/operation/postsuggest',
+                path = '../complaint/complaint?submitpath=' + url 
+                     + '&school_id=' + data.school_id 
+                     + '&rec_id=' + data.fault_id;
+            // console.log(path); 
+            wx.navigateTo({
+                url: path,
+            })
+        }
     }
 })
 
