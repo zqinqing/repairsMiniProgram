@@ -1,0 +1,16 @@
+<!--pages/scan/scan.wxml-->
+<view>
+	<view class="err-container">
+		<view>
+			<!-- <icon type="warn" size="100" color='orange' /> -->
+			<view class='repairs-pic-box'>
+				<image src='{{picUrl}}'></image>
+			</view>
+			<text class="tip-text">扫描报修二维码可快速进行报修</text>
+		</view>    
+		<view class="scan-container">
+			<button bindtap='startScan' class="primary-btn">扫二维码</button>
+			<button type="default" bindtap='goList' style='margin-top:10px;'>报修记录</button>
+		</view>
+	</view>
+</view>

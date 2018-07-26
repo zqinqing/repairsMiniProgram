@@ -1,0 +1,56 @@
+/* pages/not-bound/not-bound.wxss */
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/* padding: 200rpx 0; */
+	padding: 10rpx 0 10rpx !important;
+	box-sizing: border-box;
+} 
+
+.not-bound-container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.not-bound-container .head {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding-top: 108rpx;
+}
+
+
+.not-bound-container text {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+.not-bound-container text:nth-of-type(1) {
+	height: 120rpx;
+	line-height: 120rpx;
+	color: #000000;
+	font-size: 40rpx;
+}
+
+.not-bound-container text:nth-of-type(2) {
+	height: 80rpx;
+	line-height: 80rpx;
+	color: rgba(0, 0, 0, .4);
+	font-size: 28rpx;
+	margin-bottom: 40rpx;
+}
+
+.not-bound-container .con {
+	display: block;
+	width: 90%;
+}
+
+.primary-btn{
+	font-size: 36rpx;
+	border: 0;
+	background: #6492FF;
+	color: white;
+}

@@ -1,0 +1,135 @@
+/* pages/choice/choice.wxss */
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/* padding: 200rpx 0; */
+	padding: 0 !important;
+	box-sizing: border-box;
+    padding-bottom: 206rpx !important;
+} 
+
+.building-list {
+    width: 96%;
+    margin-left: 4%;
+    transition: all .2s linear;
+    height: 90rpx;
+    overflow: hidden;
+}
+
+.building-list-head {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #E5E5E5;
+    position: relative;
+    padding: 0 70rpx 0 0;
+}
+
+.building-list-head .iconfont {
+    display: block;
+    width: 20rpx;
+    height: 20rpx;
+    border-right: 2rpx solid #c9c9ce;
+    border-bottom: 2rpx solid #c9c9ce;
+    position: absolute;
+    top: 0;
+    right: 35rpx;
+    bottom: 0;
+    margin: auto 0;
+    transition: all .2s linear;
+    transform: rotate(-45deg);
+}
+
+.building-list-head .left, .building-list-head .right {
+    display: block;
+    font-size: 34rpx;
+
+}
+
+.building-list-head .left {
+    float: left;
+    color: #000;
+}
+
+.building-list-head .right {
+    float: right;
+    color: rgba(0, 0, 0, .4);
+}
+
+.building-list.active .building-list-head .iconfont {
+    transform: rotate(45deg);
+}
+
+.building-list.active {
+    height: auto;
+}
+
+.building-list-con {
+    width: 100%;
+    height: auto;
+
+}
+
+.building-list-box {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;    
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #E5E5E5;
+    font-size: 30rpx;
+    text-indent: 20rpx;
+    position: relative;
+    overflow: hidden;
+    transition: all .2s linear;
+    color: #a0a0a0;
+}
+
+.building-list-box {
+    color: rgba(12, 11, 11, 0.479);
+    transition: all .2s linear;
+}
+
+.building-list-box .right {
+    margin: 20rpx 64rpx 0 0 !important; 
+    float: right;
+    opacity: 0;
+}
+
+.building-list-box.active {
+    color: #000;
+}
+
+
+.building-list-box.active .right {
+    opacity: 1;
+}
+
+.building-footer {
+    width: 100%;
+    height: 206rpx;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto 0;
+    background: #fff;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 68rpx 0 0 0;
+}
+
+.building-footer button {
+    width: 240rpx;
+    color: #fff;
+    background: #c1d4ff;
+    border-color: none !important; 
+    transition: all .2s linear;
+}
+
+.building-footer button.active {
+    background: #6492FF;
+}

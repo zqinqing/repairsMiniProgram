@@ -1,0 +1,4 @@
+<!--transition.wxml-->
+<view class="container">
+	<image class="hint-pic" src='{{hintPath}}'></image>
+</view>

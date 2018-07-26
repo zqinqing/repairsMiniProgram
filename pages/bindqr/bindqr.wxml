@@ -1,0 +1,15 @@
+<!--pages/bindqr/bindqr.wxml-->
+<view>
+	<view class="err-container">
+		<view>
+			<!-- <icon type="warn" size="100" color='orange' /> -->
+			<view class='repairs-pic-box clearfix'>
+				<image src='{{picUrl}}'></image>
+			</view>
+			<text class="tip-text">为了您方便管理信息，请前往绑定</text>
+		</view>    
+		<view class="scan-container">
+			<button bindtap='bindqr' class="primary-btn">立即绑定</button>
+		</view>
+	</view>
+</view>

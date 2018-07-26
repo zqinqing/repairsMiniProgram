@@ -1,0 +1,21 @@
+<!--pages/comment/comment.wxml-->
+<view class="container clearfix">
+    <view class="comments-wrap">
+        <view class="comments-list" wx:for="{{remark}}" wx:key="{{index}}">
+            <text class="remark">{{item.name}}</text>
+            <view class="star-wrap">
+                <text 
+                    data-status="{{item.status}}" 
+                    wx:for="{{item.arr}}"
+                    wx:for-item="aitem"
+                    wx:for-index="indexes"
+                    data-index="{{indexes}}" 
+                    class="{{indexes < item.score?'active':''}}"
+                    wx:key="{{indexes}}"
+                    catchtap="grade"
+                ></text>
+            </view>
+        </view>
+        <view class="submit-btn" catchtap='submitcomments'>提交</view>
+    </view>
+</view>

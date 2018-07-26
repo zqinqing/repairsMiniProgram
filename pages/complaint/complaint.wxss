@@ -1,0 +1,208 @@
+/* pages/complaint/complaint.wxss */
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/* padding: 200rpx 0; */
+	padding: 0 !important;
+	box-sizing: border-box;
+} 
+
+
+page {
+    display: block;
+    background: #EFEFF4;
+}
+
+.complaint-wrap {
+    width: 100%;
+    height: 400rpx;
+    padding: 0 0 0 34rpx;
+    box-sizing: border-box;
+    background: #fff;
+    margin: 0 auto 20rpx;   
+}
+
+.head {
+    width: 100%;
+    height: 90rpx;
+    border-bottom: 1px solid rgba(229,229,229,1);   
+}
+
+.complaint-type {
+    display: block;
+    width: 120rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: left;
+    color:rgba(0, 0, 0, 1);
+    font-size: 34rpx;
+    float: left;
+}
+
+.radio {
+    width: 178rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    float: left;
+    font-size: 34rpx;
+    color:rgba(0, 0, 0, .5);
+    transition: all .2s linear;
+    box-sizing: border-box;
+    padding: 0 0 0 44rpx;
+    position: relative;
+
+    /* background: red; */
+}
+.radio::before {
+    display: block;
+    content: '';
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: 1px solid #7F7F7F;
+}
+
+.radio.active {
+    color: #333333;
+}
+
+.radio.active::before {
+    border: 1px solid #6492FF;
+}
+
+.radio.active::after {
+    display: block;
+    content: '';
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 9rpx;
+    margin: auto 0;
+    border-radius: 50%;
+    background: #6492FF;
+}
+
+.textarea {
+    width: 100%;
+    height: 294rpx;
+    line-height: 40rpx;
+    margin: 12rpx 0 0 0;
+    font-size: 28rpx;
+    color:rgba(0, 0, 0, 1);
+}
+
+
+.submit-btn {
+    width: 670rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    margin: 79rpx auto 0;
+    background: #6492FF;
+    color: #fff;
+    font-size: 36rpx;
+}
+
+.img-v {
+    width: 100%;
+    height: 168rpx;
+    background: #fff;
+    padding: 24rpx 0 0 34rpx;
+    box-sizing: border-box;
+
+}
+
+.img-box {
+    float: left;
+    width: 120rpx;
+    height: 120rpx;
+    /* overflow: hidden; */
+    margin: 0 20rpx 0 0;
+    position: relative;
+    border: 1rpx dashed #d8d8d8;
+    box-sizing: border-box;
+}
+
+.img-box image {
+    display: inline !important;
+/* 
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+ */
+    /* 
+    width: 100%;
+    height: 100%; 
+    */
+}
+
+.delete-btn {
+    position: absolute;
+    top: -15rpx;
+    right: -15rpx;
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .5);
+}
+
+.delete-btn::before, .delete-btn::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #fff;
+    width: 2rpx;
+    height: 25rpx;
+}
+
+.delete-btn::before {
+    transform: rotate(45deg);
+}
+
+.delete-btn::after {
+    transform: rotate(-45deg);
+}
+
+.uploading {
+    float: left;
+    width: 120rpx;
+    height: 120rpx;
+    border: 1rpx dashed #d8d8d8;
+    position: relative;
+    transition: all .3s linear;
+}
+
+.uploading image {
+    width: 50rpx;
+    height: 46rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.uploading.active {
+    width: 0rpx;
+    height: 0rpx;
+    opacity: 0;
+    overflow: hidden;
+}

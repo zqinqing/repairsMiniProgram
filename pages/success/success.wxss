@@ -1,0 +1,24 @@
+/* pages/success/success.wxss */
+
+
+.success-container{
+   margin-top: 5%;
+  text-align: center;
+}
+
+.success-lable{
+  font-size: 40rpx;
+  color: black;
+}
+
+
+.subscribe-container{
+  padding:4px 48px; 
+  margin-top: 12px;
+}
+
+
+.primary-btn{
+  background: #6492FF;
+  color: white;
+}

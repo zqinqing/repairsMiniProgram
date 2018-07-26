@@ -1,0 +1,39 @@
+<!--pages/work-order-list/work-order-list.wxml-->
+<view class="container">
+    <view class="list-container">
+        <view 
+            wx:if="{{datum.length > 0}}" 
+            wx:for="{{datum}}" 
+            class="list-view state{{item.status}}"
+            data-status='{{item.status}}'
+            data-fault_id='{{item.fault_id}}'
+            data-school_id='{{item.school_id}}'
+            wx:key="{{item.id}}"
+            catchtap="godetails"
+        >
+            <view class="list-view-head">
+                <view>{{item.school_name}}</view>
+                <text class="iconfont"></text>
+            </view>
+            <view class="list-view-con">
+                <view><text>教室地址：</text><text>{{item.building_name}} / {{item.room_name}}</text></view>
+                <view><text>报修时间：</text><text>{{item.ut}}</text></view>
+                <view><text>工单编号：</text><text>{{item.order_num}}</text></view>
+            </view>
+        </view>
+    </view>
+    <view class="low-end-tip" wx:if="{{lowendtip}}">
+        <text>这已经是我的底线了</text>
+    </view>
+    <view class="no-data" wx:if="{{nodatashow}}">
+        <image src='{{nodata}}'></image>
+    </view>
+    <!-- 
+    分页
+    https://blog.csdn.net/michael_ouyang/article/details/56846185
+    https://blog.csdn.net/michael_ouyang/article/details/55215104
+    https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#onpulldownrefresh
+    https://developers.weixin.qq.com/miniprogram/dev/framework/config.html
+    https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html
+     -->
+</view>

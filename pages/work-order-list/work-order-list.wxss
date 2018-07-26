@@ -1,0 +1,180 @@
+/* pages/work-order-list/work-order-list.wxss */
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/* padding: 200rpx 0; */
+	padding: 0 !important;
+	box-sizing: border-box;
+} 
+
+
+page {
+    display: block;
+    background: #EFEFF4;
+}
+
+
+.no-data {
+    width: 100%;
+    display: block;
+}
+
+.no-data image {
+    display: block;
+    width: 80%;
+    margin: 60rpx auto 0;
+}
+
+.low-end-tip {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    position: relative;
+    font-size: 28rpx;
+    /* background: rgb(239,239,244);  */
+    color:gray
+}
+.low-end-tip text {
+    position: relative;
+    padding: 0 20rpx;
+    background: #EFEFF4;
+}
+
+.low-end-tip:before{
+    display: block;
+    content: '';
+    width: 100%;
+    height: 1rpx;
+    border-top: 1px dashed gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+
+/* 内容样式 */
+
+
+.list-container {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.list-view {
+    width: 100%;
+    height: 268rpx;
+    background: #fff;
+    
+    margin: 0 auto 20rpx;
+    box-sizing: border-box;
+    padding: 0 0 0 35rpx;
+    position: relative;
+}
+
+.list-view.state0:before, .list-view.state1:before, .list-view.state9:before, .list-view.state2:before, .list-view.state3:before {
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 24rpx;
+    font-family: "microsoft yahei";
+    box-sizing: border-box;
+    position: absolute;
+    right: 40rpx;
+    bottom: 40rpx;
+}
+
+.list-view.state0:before {
+  border: 1px solid #F96A6A;
+  color: #F96A6A;
+  content: "待处理";
+}
+
+.list-view.state1:before, .list-view.state9:before {
+  border: 1px solid #6492FF;
+  color: #6492FF;
+  content: "处理中";
+}
+
+.list-view.state2:before, .list-view.state3:before {
+  border: 1px solid #09BB07;
+  color: #09BB07;
+  content: "已处理";
+}
+
+.list-view-head {
+  width: 100%;
+  height: 88rpx;
+  border-bottom: 1px solid #d8d8d8;
+}
+.list-view-head view {
+  width: 90%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: left;
+  float: left;
+  font-family: "microsoft yahei";
+  color: #333;
+  font-size: 34rpx;
+  /*文字超出文本框范围自动转为省略号*/
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.list-view-head text {
+    display: block;
+    width: 26rpx;
+    height: 26rpx;
+    border-right: 1px solid #c7c7cc;
+    border-top: 1px solid #c7c7cc;
+    float: right;
+    transform: rotate(45deg);
+    margin: 32rpx 35rpx 0 0;
+}
+
+.list-view-con {
+    width: 572rpx;
+    height: 167rpx;
+    float: left;
+    padding: 4rpx 0 0 0;
+    box-sizing: border-box;
+}
+.list-view-con view {
+    width: 100%;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: left;
+    font-family: "microsoft yahei";
+    color: #333;
+    font-size: 28rpx;
+}
+.list-view-con view text {
+  display: block;
+  height: 56rpx;
+  line-height: 56rpx;
+  float: left;
+
+  /*文字超出文本框范围自动转为省略号*/
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.list-view-con view text:nth-of-type(1) {
+  width: 30%;
+  color: rgba(0, 0, 0, 0.5);
+}
+.list-view-con view text:nth-of-type(2) {
+  width: 70%;
+  color: #333333;
+}

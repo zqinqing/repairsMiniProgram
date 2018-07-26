@@ -1,0 +1,12 @@
+<!--pages/not-bound/not-bound.wxml-->
+<view class="container not-bound-container">
+	<view class="head">
+		<icon type="warn" size="100" color='#F96A6A' />
+		<text>未绑定</text>
+		<text>请您尽快与工作人员联系</text>
+	</view> 
+	<view class="con">
+		<button bindtap='quitBtn' class="primary-btn">退出</button>
+	</view>
+</view>
+

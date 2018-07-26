@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view style='margin:0'>
+    <view class="content">
+        <view class="room-info">
+            <view class="room-item">
+                <text class="school-name">{{school_name}}</text>
+            </view>
+            <view class="room-item">
+                <text>{{room_name}}</text>
+            </view>
+        </view>
+        <view class="form">
+            <view class="select-video">
+                <form bindsubmit="selectVideo" report-submit="true">
+                    <button class="form_button" formType="submit">
+                        <view class="video-container" hidden='{{videoadd}}'>
+                            <image src="{{videoicon}}"></image>
+                            <!-- 
+                            <view style='margin-top:-20px;padding:0;'>
+                                <text style='font-size:0.8rem;'>点击拍摄故障短视频</text>
+                            </view>
+                             -->
+                        </view>
+                    </button>
+                </form>
+                <view class="preview-container">
+                    <video src="{{videosrc}}" id="video" style='width:{{videowidth}}px' hidden='{{videoPreview}}'></video>
+                </view>
+            </view>
+
+        </view>
+
+        <form bindsubmit="formSubmit" class="postBtn" report-submit="true">
+            <view>
+                <button formType="submit" class="savebtn" style='opacity:{{btn_opacity}}'>提交</button>
+            </view>
+        </form>
+    </view>
+</view>

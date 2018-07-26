@@ -1,0 +1,83 @@
+/* pages/scan/scan.wxss */
+.nav-top{
+  background: green;
+  color: white;
+  height:40px;
+  line-height: 40px;
+}
+
+.title{ 
+   height:40px;
+   line-height: 40px;
+   margin-left: 8px;
+   position: relative;
+   top:-6px;
+   font-size: 1.2rem; 
+}
+
+.logo{
+  width: 24px;
+  height:24px; 
+  margin-left:16px; 
+  margin-top: 8px;
+}
+
+.nav-btn{
+    position: absolute;
+    right: 8px;
+    top:10px;
+    border:1px solid white;
+    border-radius: 6px;
+    padding: 2px 12px;
+    height:20px; 
+    line-height: 20px;
+    font-size:0.8rem;
+}
+
+.err-container{
+    margin-top:30px;
+    text-align: center;
+}
+
+.err-lable{
+  font-size: 0.8rem;
+  color: gray;
+}
+
+
+.scan-container{
+  padding:4px 16px; 
+  margin-top: 12px;
+}
+
+
+
+.primary-btn{
+	font-size: 36rpx;
+	border: 0;
+	background: #6492FF;
+	color: white;
+}
+
+.repairs-pic-box {
+	width: 300rpx;
+	height: 300rpx;
+	margin: 120rpx auto 0rpx;
+}
+
+.repairs-pic-box image {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.tip-text {
+	display: block;
+	width: 100%;
+	height: 100rpx;
+	line-height: 100rpx;
+	text-align: center;
+	font-size: 28rpx;
+	color: rgba(0, 0, 0, .4);
+	margin: 20rpx auto 0;
+}

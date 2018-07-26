@@ -1,0 +1,57 @@
+<!--pages/work-order-details/work-order-details.wxml-->
+<view class="container clearfix" wx:if="{{datum}}">
+    <view class="header state{{datum.status}}">
+        <view class="head-img">
+            <image src="{{datum.head_img}}"></image>
+        </view>
+        <view class="head-con">
+            <text>{{datum.nick_name}}</text>
+            <text>{{datum.building_name}} / {{datum.room_name}}</text>
+        </view>
+    </view>
+    <view class="video-wrap">
+        <video id="video" src="{{datum.imgs[0]}}" poster="{{datum.preview_img}}" objectFit="cover" controls></video>
+        <!-- objectFit="cover" fill：填充，cover：覆盖 -->
+    </view>
+    <view class="time">{{datum.ut}}</view>
+
+    <view class="reply-wrap">
+        <view class="reply-info" wx:if="{{alist.length === 0}}">暂无回复</view>
+        <view class="reply-list" wx:if="{{alist.length !== 0}}" wx:for="{{alist}}" wx:key="{{item.reply_id}}">
+            <view class="reply-head">
+                <image src="{{item.head_img}}"></image>
+            </view>
+            <view class="reply-head-con">
+                <text>{{item.fromU}}</text>
+                <text>{{item.ut}}</text>
+            </view>
+            <view class="reply-con">
+                <text>{{item.reply_desc}}</text>
+                <view 
+                    class="img-box" 
+                    wx:if="{{item.reply_imgs.length > 0}}" 
+                    wx:for="{{item.reply_imgs}}" 
+                    wx:for-item="current"
+                    wx:key="{{current}}"
+                >
+                    <image 
+                        src="{{current}}" 
+                        bindtap="changePreview" 
+                        data-src="{{current}}" 
+                        data-arr="{{item.reply_imgs}}"
+                    ></image>
+                </view>
+            </view>
+        </view>
+        <!-- lowendtip
+        <view class="low-end-tip" wx:if="{{alist.length > 0}}">
+            <text>这已经是我的底线了</text>
+        </view>
+        -->
+    </view>
+
+    <view class="footer">
+        <text catchtap="reminder">催单</text>
+        <text catchtap="complaint">投诉建议</text>
+    </view>
+</view>

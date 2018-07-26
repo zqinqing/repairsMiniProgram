@@ -1,0 +1,98 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "wxbf06d08c65e71014",
+	"projectname": "%E5%BF%83%E6%89%98%E6%9C%8D%E6%8A%A5%E9%9A%9C",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 9,
+			"list": [
+				{
+					"id": 0,
+					"name": "test",
+					"pathName": "pages/index/index",
+					"query": "scene=1_2_hdshhhdshdhshjdsfdhjbjbhdfs"
+				},
+				{
+					"id": -1,
+					"name": "test1",
+					"pathName": "pages/index/index",
+					"query": "schoolid=1&roomid=1&auth=hhsdsbbzdcssdhsfdhf"
+				},
+				{
+					"id": 2,
+					"name": "test1",
+					"pathName": "pages/index/index",
+					"query": "scene=code_111"
+				},
+				{
+					"id": 3,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": "scene=1_139"
+				},
+				{
+					"id": -1,
+					"name": "scan",
+					"pathName": "pages/scan/scan",
+					"query": "schoolid=1&roomid=1&auth=hhsdsbbzdcssdhsfdhf"
+				},
+				{
+					"id": -1,
+					"name": "success",
+					"pathName": "pages/success/success",
+					"query": "schoolid=1&roomid=1&auth=hhsdsbbzdcssdhsfdhf"
+				},
+				{
+					"id": 6,
+					"name": "transition",
+					"pathName": "pages/transition/transition",
+					"query": "scene=code_1"
+				},
+				{
+					"id": -1,
+					"name": "binding-success",
+					"pathName": "pages/binding-success/binding-success",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "work-order-details",
+					"pathName": "pages/work-order-details/work-order-details",
+					"query": "fault_id=378&school_id=1&status=2"
+				},
+				{
+					"id": -1,
+					"name": "complaint",
+					"pathName": "pages/complaint/complaint",
+					"query": ""
+				}
+			]
+		}
+	}
+}

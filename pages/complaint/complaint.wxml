@@ -1,0 +1,31 @@
+<!--pages/complaint/complaint.wxml-->
+<view class="container clearfix">
+    <view class="complaint-wrap">
+        <view class="head">
+            <text class="complaint-type">类型:</text>
+            <view 
+                wx:for="{{radioData.arr}}"
+                wx:key="{{index}}" 
+                class="radio {{radioData.state === index?'active':''}}" 
+                data-index="{{index}}"
+                catchtap="complainttype"
+            >{{item}}</view>
+        </view>
+        <textarea
+            placeholder="请输入您的反馈意见"
+            placeholder-style="color: rgba(0, 0, 0, .5);"
+            class="textarea"
+            value="{{text}}"
+        ></textarea>
+    </view>
+    <view class="img-v clearfix">
+        <view class="img-box" wx:for="{{imgs}}" wx:for-item="item" wx:key="index">
+            <image mode="aspectFill" src="{{item}}" catchtap="previewImg" data-index="{{index}}"></image>
+            <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></view>
+        </view>
+        <view class="uploading {{imgs.length !== 4 && imgs.length < 4?'':'active'}}" catchtap="chooseImg">
+            <image src="{{uploadingpath}}"></image>
+        </view>
+    </view>
+    <view class="submit-btn" bindtap='submit'>提交</view>
+</view>

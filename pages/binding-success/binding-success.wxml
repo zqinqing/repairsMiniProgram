@@ -1,0 +1,14 @@
+<!--pages/binding-success/binding-success.wxml-->
+<view class="container">
+    <view class="success-icon-wrap">
+        <icon type="success" size="100" color='#6492FF' />
+    </view>
+    <view class="success-text-wrap">
+        <text>绑定成功</text>
+        <text>请耐心等待，工作人员会尽快处理</text>
+    </view>
+    <view class="success-btn-wrap">
+        <button bindtap='continuebind'>继续绑定</button>
+        <button bindtap='quit'>绑定完成</button>
+    </view>
+</view>

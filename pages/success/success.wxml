@@ -1,0 +1,17 @@
+<view>
+  <view class="success-container">
+    <view>
+        <icon type="success" size="100" color='#6492FF' />
+    </view>
+    <view style='margin-top:16px;padding:0 16px;'>
+        <text class="success-lable" style='display: block;'>报修成功</text>
+        <text style='font-size:0.8rem;color:rgb(176,176,176); display: block; padding: 20rpx 0;'>请耐心等待，工作人员会尽快处理</text>
+    </view>
+        <view style="padding:8px 16px">
+            <button bindtap='goHistory' class="primary-btn">报修完成</button>
+        </view>
+        <view style="padding:8px 16px">
+            <button bindtap='goHistory'>报修记录</button>
+        </view>
+  </view>
+</view>

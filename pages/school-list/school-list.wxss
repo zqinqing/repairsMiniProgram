@@ -1,0 +1,23 @@
+/* pages/school-list/school-list.wxss */
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/* padding: 200rpx 0; */
+	padding: 0 !important;
+	box-sizing: border-box;
+} 
+
+.school-list {
+    display: block;
+    width: 96%;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: left;
+    font-size: 28rpx;
+    color: #000;
+    border-bottom: 1rpx solid #E5E5E5;
+    margin-left: 4%;
+}

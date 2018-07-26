@@ -1,0 +1,25 @@
+{
+    "pages": [
+        "pages/transition/transition",
+        "pages/index/index",
+        "pages/scan/scan",
+        "pages/success/success",
+        "pages/list/list",
+        "pages/detail/detail",
+        "pages/not-bound/not-bound",
+        "pages/bindqr/bindqr",
+        "pages/school-list/school-list",
+        "pages/choice/choice",
+        "pages/binding-success/binding-success",
+        "pages/work-order-list/work-order-list",
+        "pages/work-order-details/work-order-details",
+        "pages/comment/comment",
+        "pages/complaint/complaint"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#6492FF",
+        "navigationBarTitleText": "心托服运维",
+        "navigationBarTextStyle": "white"
+    }
+}

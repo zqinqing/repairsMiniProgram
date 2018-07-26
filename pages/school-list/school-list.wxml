@@ -1,0 +1,8 @@
+<!--pages/school-list/school-list.wxml-->
+<view class="container">
+    <block wx:for="{{schoolslist}}" wx:key="{{item.id}}"> 
+        <view class="school-list"  bindtap="gochoice" data-id="{{item.id}}">
+            {{item.name}}
+        </view>
+    </block> 
+</view>

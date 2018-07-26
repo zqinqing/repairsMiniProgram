@@ -1,0 +1,8 @@
+{
+    "navigationBarBackgroundColor": "#6492FF",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "工单列表",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+}

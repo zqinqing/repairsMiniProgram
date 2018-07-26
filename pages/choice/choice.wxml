@@ -1,0 +1,32 @@
+<!--pages/choice/choice.wxml-->
+<view class="container">
+    <view 
+        wx:if="{{buildingData !== null}}" 
+        wx:for="{{buildingData}}" 
+        wx:key="{{item.id}}"
+        class="building-list clearfix {{item.state?'active':''}}" 
+    >
+        <view class="building-list-head" data-index="{{index}}" catchtap="menuswitch">
+            <text class="left" data-index="{{index}}" catchtap="menuswitch">{{item.building_name}}</text>
+            <text class="right" data-index="{{index}}" catchtap="menuswitch">{{item.rooms.length}}间教室</text>    
+            <text class='iconfont' data-index="{{index}}" catchtap="menuswitch"></text>
+        </view>
+        <view class="building-list-con">
+            <view 
+                class="building-list-box {{item.state?'active':''}}" 
+                wx:for="{{item.rooms}}" 
+                wx:key="{{item.rooms.room_id}}"
+                id="{{item.room_id}}"
+                data-index="{{index}}" 
+                catchtap="choice"
+            >
+                {{item.room_name}}
+                <icon type="success" size="20" class="right"/>
+            </view>    
+        </view>
+    </view>
+
+    <view class="building-footer">
+        <button class="{{submitbtn?'active':''}}" data-off="{{submitbtn?'1':'0'}}" catchtap="submit">确定</button>
+    </view>
+</view>
