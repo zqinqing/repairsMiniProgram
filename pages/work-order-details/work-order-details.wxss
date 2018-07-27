@@ -181,7 +181,7 @@ page {
     border-right: 10rpx solid transparent;
     border-bottom: 16rpx solid #EFEFF4;
     position: absolute;
-    top: -15rpx;
+    top: -14rpx;
     left: 22rpx;
 } 
 
