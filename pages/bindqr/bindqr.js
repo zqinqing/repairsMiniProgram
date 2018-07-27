@@ -82,14 +82,19 @@ Page({
                 var arr = JSON.parse(res.data);
                 if (arr.length > 1) { // 跳转学校列表页面
                     console.log('schools长度大于1');
-                    wx.navigateTo({
-                        url: '../school-list/school-list'
+                    wx.redirectTo({
+                        url: '../school-list/school-list',
                     })
+                    /*
+                    wx.navigateTo({
+                        url: ''
+                    })
+                    */
                 }else {              // 当学校列表只有1个的时候，直接跳转楼栋选择页面
                     console.log('school长度等于1');
                     const id = arr[0].id;
                     // 带id参数跳转选择页面
-                    wx.navigateTo({
+                    wx.redirectTo({
                         url: '../choice/choice?id=' + id
                     })
                 }
