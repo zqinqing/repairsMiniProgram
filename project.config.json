@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
@@ -84,7 +84,7 @@
 					"id": 8,
 					"name": "work-order-details",
 					"pathName": "pages/work-order-details/work-order-details",
-					"query": "fault_id=378&school_id=1&status=2"
+					"query": "scene=f390s1"
 				},
 				{
 					"id": -1,

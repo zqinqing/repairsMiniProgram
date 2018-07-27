@@ -22,10 +22,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        wx.showLoading({
-            title: '加载中',
-            mask: true,
-        })
+        var _this = this,
+            data = _this.data.datum;
+        if (JSON.stringify(data) === '{}'){
+            wx.showLoading({
+                title: '加载中',
+                mask: true,
+            })
+        }        
         this.getUserInfo(); // 获取用户信息
     },
 
@@ -166,7 +170,7 @@ Page({
             responseType: 'text',
             success: function (res) {
                 if (res.errMsg === "request:ok" && res.data.code === 0){
-                    // console.log(res, '获取工单列表数据成功')
+                    console.log(res, '获取工单列表数据成功')
                     if (res.data.data.length > 0){
                         _this.setData({
                             datum: res.data.data,
@@ -201,10 +205,9 @@ Page({
         var fault_id = e.currentTarget.dataset.fault_id,
             school_id = e.currentTarget.dataset.school_id,
             status = e.currentTarget.dataset.status,
-            navigateUrl = '../work-order-details/work-order-details?fault_id=' + fault_id 
-                        + "&school_id=" + school_id 
-                        + "&status=" + status;
+            navigateUrl = '../work-order-details/work-order-details?scene=f' + fault_id + 's' + school_id;
         // console.log("status:", status, "fault_id:", fault_id, "school_id:", school_id, '前往工单详情页');
+        console.log(navigateUrl);
         wx.navigateTo({
             url: navigateUrl
         })

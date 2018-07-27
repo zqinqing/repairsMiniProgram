@@ -11,7 +11,6 @@ Page({
         datum: '',          // 页面数据请求
         alist: '',          // 用户回复列表
         adminInfo: '',      // 用户信息
-        reminderOff: true,  // 催单开关
     },
 
     /**
@@ -24,41 +23,15 @@ Page({
         })  
 
         var _this = this,
-            fault_id = parseInt(options.fault_id),
-            school_id = parseInt(options.school_id);
-        // console.log(options, 'fault_id:', fault_id, 'school_id', school_id);
-
-        
-
-        if (fault_id && school_id){
-            // console.log(fault_id, school_id);
-            wx.getStorage({
-                key: 'admin',
-                success: function(res) {
-                    if (res.errMsg === "getStorage:ok"){
-                        var data = JSON.parse(res.data);
-                        // console.log(data, '工单详情获取本地用户信息缓存成功!');
-                        data.fault_id = fault_id;
-                        data.school_id = school_id;
-                        if (data.fault_id && data.school_id){
-                            _this.setData({
-                                adminInfo: data
-                            })
-                            // console.log(_this.data.adminInfo);
-                            _this.getReportDetails();  // 获取用户获取报修详情
-                            _this.getReplyToList();    // 获取用户获取检修回复列表
-                            setTimeout(function() {
-                                wx.hideLoading();
-                            }, 300)
-                        }
-                    }
-                },
-                fail: function(res) {
-                    console.log(res, '工单详情获取本地用户信息缓存失败!');
-                },
-                complete: function(res) {},
-            })
-        }        
+            arr = options.scene.split('f')[1].split('s'),
+            fault_id = arr[0],
+            school_id = arr[1];
+        // console.log(fault_id, school_id, options);
+        _this.setData({
+            fault_id: parseInt(fault_id),
+            school_id: parseInt(school_id),
+        })
+        _this.getUserInfo();              
     },
 
     /**
@@ -110,6 +83,94 @@ Page({
     
     },
     /**
+     * 获取用户信息
+     */
+    getUserInfo: function () {
+        var _this = this,
+            fault_id = _this.data.fault_id,
+            school_id = _this.data.school_id;
+        if (fault_id && school_id) {
+            // console.log(fault_id, school_id);
+            wx.getStorage({
+                key: 'admin',
+                success: function (res) {
+                    if (res.errMsg === "getStorage:ok") {
+                        var data = JSON.parse(res.data);
+                        // console.log(data, '工单详情获取本地用户信息缓存成功!');
+                        data.fault_id = fault_id;
+                        data.school_id = school_id;
+                        if (data.fault_id && data.school_id) {
+                            _this.setData({
+                                adminInfo: data
+                            })
+                            console.log(_this.data.adminInfo);
+                            _this.getReportDetails();  // 获取用户获取报修详情
+                            _this.getReplyToList();    // 获取用户获取检修回复列表
+                            setTimeout(function () {
+                                wx.hideLoading();
+                            }, 300)
+                        }
+                    }
+                },
+                fail: function (res) {
+                    console.log(res, '工单详情获取本地用户信息缓存失败!');
+                    _this.loginCode();  // 重新登录获取用户信息
+                },
+                complete: function (res) { },
+            })
+        }  
+    },
+    /**
+     * 登录，获取login code
+     */
+    loginCode: function () {
+        let _this = this;
+        wx.login({
+            success: function (res) {
+                if (res.errMsg === "login:ok") {
+                    // console.log(res, '登录获取code成功!');
+                    _this.getUnionid(res.code);
+                }
+            },
+            fail: function (res) {
+                console.log(res, '登录获取code失败!');
+            },
+            complete: function (res) { },
+        })
+    },
+    /** 
+     * 通过login code 获取用户信息
+     */
+    getUnionid: function (code) {
+        let _this = this,
+            url = "https://www." + util.host + "/weixinweb/xiaochengcxulogin/" + code;
+        wx.request({
+            url: url,
+            data: '',
+            header: {},
+            method: 'GET',
+            dataType: 'json',
+            responseType: 'text',
+            success: function (res) {
+                if (res.statusCode === 200) {
+                    let data = JSON.stringify(res.data);
+                    // console.log(data);
+                    wx.setStorage({  // 缓存管理员用户信息
+                        key: "admin",
+                        data: data,
+                        success: function (res) {
+                            _this.getUserInfo(); // 重新获取列表数据
+                        }
+                    })
+                }
+            },
+            fail: function (res) {
+                console.log(res, '获取unionid失败!');
+            },
+            complete: function (res) { },
+        })
+    },
+    /**
      * 用户获取报修详情
      */
     getReportDetails: function(){
@@ -151,6 +212,8 @@ Page({
                 },
                 complete: function (res) { },
             })
+        }else {
+            console.log('用户信息获取错误，请给正确的设备保修id以及学校id!');
         }
     },
     /**
@@ -238,27 +301,54 @@ Page({
      * 催单
      */
     reminder: function(){
-        var _this = this;
-        if (_this.data.reminderOff){
-            _this.setData({
-                reminderOff: false
-            })
+        var _this = this,
+            data = _this.data.adminInfo;
+        console.log(data);
+        if (data.school_id && data.fault_id){
+            var url = 'https://www.' + util.host + '/usr/'
+                + data.userid + '/'
+                + data.session
+                + '/operation/speedup/'
+                + data.school_id + '/'
+                + data.fault_id;
+            console.log(url)
             wx.showModal({
                 title: '催单',
                 content: '确认催促检修员加速处理吗？',
                 success: function (res) {
                     if (res.confirm) {
-                        console.log('用户点击确定')
+                        console.log('用户点击确定');
+                        wx.request({
+                            url: url,
+                            data: '',
+                            header: {},
+                            method: 'GET',
+                            dataType: 'json',
+                            responseType: 'text',
+                            success: function (res) {
+                                if (res.statusCode === 200 && res.data.code === 0){
+                                    console.log(res, '催单成功');
+                                    wx.showToast({
+                                        title: '催单成功!',
+                                        icon: 'success'
+                                    })
+                                } else if (res.data.code === -2) {
+                                    wx.showToast({
+                                        title: '请勿频繁操作!',
+                                        icon: 'none',
+                                        duration: 2000
+                                    })
+                                }
+                            },
+                            fail: function (res) {
+                                console.log(res, '催单失败!')
+                            },
+                            complete: function (res) { },
+                        })
                     } else if (res.cancel) {
                         console.log('用户点击取消')
                     }
                 }
-            })
-        }else {
-            wx.showToast({
-                title: '请勿频繁操作!',
-                icon: 'none',
-                duration: 2000
             })
         }
     },
@@ -286,7 +376,7 @@ Page({
                 success: function(response) {
                     if (response.statusCode === 200 && response.data.code === 0){
                         var datum = response.data.data;
-                        console.log(datum)
+                        // console.log(datum)
                         if (datum.length === 0) {
                             console.log('需要评论!');
                             var commentUrl = '../comment/comment'
