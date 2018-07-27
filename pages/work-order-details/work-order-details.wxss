@@ -181,7 +181,7 @@ page {
     border-right: 10rpx solid transparent;
     border-bottom: 16rpx solid #EFEFF4;
     position: absolute;
-    top: -16rpx;
+    top: -15rpx;
     left: 22rpx;
 } 
 
@@ -320,3 +320,6 @@ page {
 	flex-basis: 50%;
 }
 
+.footer text:nth-of-type(1) {
+    border-right: 1rpx solid #d8d8d8;
+}

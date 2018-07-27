@@ -184,12 +184,14 @@ Page({
                             var aimg = [],
                                 data = response.data.data;
                             data.forEach((value, index, arr) => {
+                                /*
                                 if (value.reply_desc.indexOf('程:') !== -1) {
                                     data[index].reply_desc = data[index].reply_desc.replace('程:', '程:\n')
                                 }
                                 if (value.reply_desc.indexOf('备:') !== -1) {
                                     data[index].reply_desc = data[index].reply_desc.replace('备:', '备:\n')
                                 }
+                                */
                                 if (value.reply_desc.indexOf('<br />') !== -1){
                                     data[index].reply_desc = data[index].reply_desc.replace('<br />','\n')
                                 }
