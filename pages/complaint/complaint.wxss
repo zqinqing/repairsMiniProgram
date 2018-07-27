@@ -109,9 +109,13 @@ page {
     border-radius: 10rpx;
     text-align: center;
     margin: 79rpx auto 0;
-    background: #6492FF;
+    background: #A9C0F9;
     color: #fff;
     font-size: 36rpx;
+}
+
+.submit-btn.active {
+    background: #6492FF;
 }
 
 .img-v {

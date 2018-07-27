@@ -13,13 +13,13 @@ Page({
      */
     onLoad: function (options) {
         wx.setNavigationBarTitle({
-            title: '成功'
+            title: '报修成功'
         })
     },
-
+    /*
     goHistory:function(){
         wx.navigateTo({
             url: '../work-order-list/work-order-list',
         })
-    }
+    }*/
 })

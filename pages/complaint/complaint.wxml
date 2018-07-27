@@ -27,5 +27,5 @@
             <image src="{{uploadingpath}}"></image>
         </view>
     </view>
-    <view class="submit-btn" bindtap='submit'>提交</view>
+    <view class="submit-btn {{btncolor?'active':''}}" bindtap='submit'>提交</view>
 </view>

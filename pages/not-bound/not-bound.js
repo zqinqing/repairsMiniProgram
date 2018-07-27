@@ -66,11 +66,12 @@ Page({
 	
 	},
 	// 退出微信小程序
+    /*
 	quitBtn: function(){
 		console.log(getCurrentPages()[0].route)
 		util.flag = true;
 		wx.reLaunch({
 			url: '../not-bound/not-bound',
 		})
-	}
+	}*/
 })

@@ -5,8 +5,10 @@
 		<text>未绑定</text>
 		<text>请您尽快与工作人员联系</text>
 	</view> 
+    <!-- 
 	<view class="con">
 		<button bindtap='quitBtn' class="primary-btn">退出</button>
 	</view>
+     -->
 </view>
 

@@ -78,9 +78,10 @@ Page({
     /**
      * 退出页面
      */
+    /*
     quit: function () {
         wx.navigateBack({
             delta: 1
         })
-    }
+    }*/
 })

@@ -12,11 +12,12 @@ Page({
             arr: ['建议', '投诉'],
             state: 0
         },
-        text: '',        // textarea
-        imgs: [],        // 图片数组
+        text: '',         // textarea
+        imgs: [],         // 图片数组
         uploadingpath: '',// 上传图片
         path: 'http://desk.fd.zol-img.com.cn/t_s1920x1080/g5/M00/05/0C/ChMkJ1l_JRCIA-oAAAS5EW43hXUAAfSaAEVxL8ABLkp466.jpg',
-        submitData: {}    // 提交链接
+        submitData: {},   // 提交链接
+        btncolor: false,  // 提交按钮颜色
     },
 
     /**
@@ -157,12 +158,14 @@ Page({
         })
     },
     /**
-     * 
+     * 获取多行文本框的内容
      */
     textareavalue: function(event){
         var value = event.detail.value;
+        // console.log(value.length);
         this.setData({
-            text: value
+            text: value,
+            btncolor: value.length > 0 ? true : false,
         })
     },
     /**
@@ -170,8 +173,9 @@ Page({
      */
     submit: function(){
         let _this = this,
+            text = _this.data.text,
             simgs = this.data.imgs;
-        if (simgs.length > 0){
+        if (simgs.length > 0 && text.length > 0){
             wx.showLoading({
                 title: '上传文件中...',
                 mask: true
@@ -260,7 +264,7 @@ Page({
                                 wx.navigateBack({
                                     delta: 1,
                                 })
-                            }, 3000)
+                            }, 2000)
                         }
                     })
                 }
