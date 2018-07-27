@@ -44,7 +44,7 @@ Page({
         */
 
         wx.setNavigationBarTitle({
-            title: '报修'
+            title: '扫码报修'
         })
         var _this = this;
         wx.getSystemInfo({
@@ -106,7 +106,6 @@ Page({
                                                 }
                                             });
                                         }
-
                                     },
                                     fail: function (obj) {
                                         if (obj.errMsg) {
@@ -121,7 +120,6 @@ Page({
                         }
                     })
                 }
-
             }
         });        
 
@@ -195,7 +193,7 @@ Page({
         this.globalData.formIds.push(e.detail.formId);
         wx.chooseVideo({
             sourceType: ['camera'],
-            maxDuration: 20,
+            maxDuration: 60,
             success: function(res) {
                 _this.globalData.hasVideo = true;
                 _this.setData({

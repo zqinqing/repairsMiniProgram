@@ -113,7 +113,7 @@ Page({
                     var school_id = res.data.data.school_id,
                         room_id = res.data.data.room_id;
                     wx.redirectTo({// 跳转到报修页面   跳转到报修页面需要携带参数跳转
-                            url: '../index/index?school_id=' + school_id + '&room_id=' + room_id,
+                        url: '../index/index?school_id=' + school_id + '&room_id=' + room_id,
                     })
                 } else {  // 未绑定
                     than.loginGettingData();   // 去请求判断管理员权限
@@ -228,16 +228,21 @@ Page({
                                 success: function (res) {
                                     console.log(res.data)
                                     if (res.data !== ''){
-                                        wx.navigateTo({
+                                        wx.redirectTo({
                                             url: '../bindqr/bindqr'
                                         })
                                     }
                                 }
                             })
 						}else {							 		// 没权限 跳转到联系管理员页面
-                            wx.navigateTo({
-								url: '../scan/scan'
-							})
+                            wx.redirectTo({
+                                url: '../not-bound/not-bound'
+                            })
+                            /*
+                                wx.redirectTo({
+                                    url: '../scan/scan'
+                                })
+                            */
 						}
 					}
 				},

@@ -11,24 +11,19 @@ Page({
         remark: [
             {
                 name: '处理速度',
-                status: 0,
-                score: 0,
-                arr: [0 , 0, 0, 0, 0]
+                score: 0
             },
             {
                 name: '服务质量',
-                status: 1,
-                score: 0,
-                arr: [0, 0, 0, 0, 0]
+                score: 0
             },
             {
                 name: '服务态度',
-                status: 2,
-                score: 0,
-                arr: [0, 0, 0, 0, 0]
+                score: 0
             }
         ],
         datum: '',        // 数据
+        submitswitch: false, // 提交开关
     },
 
     /**
@@ -97,16 +92,20 @@ Page({
             _array = this.data.remark,
             index = event.currentTarget.dataset.index,
             status = event.currentTarget.dataset.status;
-        //console.log(_array);
         if (index + 1 && status + 1){
-            _array[status].arr[index] = 1;
             _array[status].score = (index + 1);
-            // console.log(_array)
-            _this.setData({
-                remark: _array
+            var num = 0;
+            _array.forEach((vaule, index, array) => {
+                if (_array[index].score > 0) {
+                    num++;
+                }
             })
-            
+            _this.setData({
+                remark: _array,
+                submitswitch: num === 3 ? true : false,
+            })
         }
+        //console.log(_array)
     },
     /**
      * 提交评论  /usr/:userid/:session/operation/scorefinishrec/:school_id/:recid/:speed_score/:quality_score/:attitude_score
@@ -154,7 +153,7 @@ Page({
                                     wx.navigateBack({
                                         delta: 1,
                                     })
-                                }, 3000)
+                                }, 2000)
                             }
                         })
                     }

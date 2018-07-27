@@ -16,10 +16,13 @@ Page({
             title: '报修成功'
         })
     },
-    /*
     goHistory:function(){
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../work-order-list/work-order-list',
         })
-    }*/
+        /*
+        wx.navigateTo({
+            url: '',
+        })*/
+    }
 })

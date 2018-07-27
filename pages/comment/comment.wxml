@@ -5,8 +5,8 @@
             <text class="remark">{{item.name}}</text>
             <view class="star-wrap">
                 <text 
-                    data-status="{{item.status}}" 
-                    wx:for="{{item.arr}}"
+                    data-status="{{index}}" 
+                    wx:for="{{5}}"
                     wx:for-item="aitem"
                     wx:for-index="indexes"
                     data-index="{{indexes}}" 
@@ -16,6 +16,6 @@
                 ></text>
             </view>
         </view>
-        <view class="submit-btn" catchtap='submitcomments'>提交</view>
+        <view class="submit-btn {{submitswitch?'active':''}}" catchtap='submitcomments'>提交</view>
     </view>
 </view>
