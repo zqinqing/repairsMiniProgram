@@ -326,15 +326,16 @@ Page({
                             dataType: 'json',
                             responseType: 'text',
                             success: function (res) {
+                                console.log(res)
                                 if (res.statusCode === 200 && res.data.code === 0){
                                     console.log(res, '催单成功');
                                     wx.showToast({
                                         title: '催单成功!',
                                         icon: 'success'
-                                    })
+                                    });
                                 } else if (res.data.code === -2) {
                                     wx.showToast({
-                                        title: '请勿频繁操作!',
+                                        title: res.data.msg,
                                         icon: 'none',
                                         duration: 2000
                                     })

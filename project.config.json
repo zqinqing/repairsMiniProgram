@@ -72,7 +72,7 @@
 					"id": 6,
 					"name": "transition",
 					"pathName": "pages/transition/transition",
-					"query": "scene=code_1"
+					"query": "scene=code_54"
 				},
 				{
 					"id": -1,
@@ -90,6 +90,12 @@
 					"id": -1,
 					"name": "complaint",
 					"pathName": "pages/complaint/complaint",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "work-order-list",
+					"pathName": "pages/work-order-list/work-order-list",
 					"query": ""
 				}
 			]

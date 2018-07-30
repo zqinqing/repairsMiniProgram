@@ -51,14 +51,14 @@ page {
     color:rgba(0, 0, 0, .5);
     transition: all .2s linear;
     box-sizing: border-box;
-    padding: 0 0 0 44rpx;
+    padding: 0 0 0 48rpx;
     position: relative;
 
     /* background: red; */
 }
-.radio::before {
+
+.radio text {
     display: block;
-    content: '';
     width: 30rpx;
     height: 30rpx;
     border-radius: 50%;
@@ -74,20 +74,21 @@ page {
     color: #333333;
 }
 
-.radio.active::before {
+.radio.active text {
     border: 1px solid #6492FF;
 }
 
-.radio.active::after {
+.radio.active text::before {
     display: block;
     content: '';
-    width: 16rpx;
-    height: 16rpx;
+    width: 14rpx;
+    height: 14rpx;
     position: absolute;
     top: 0;
+    right: 0;
     bottom: 0;
-    left: 9rpx;
-    margin: auto 0;
+    left: 0;
+    margin: auto;
     border-radius: 50%;
     background: #6492FF;
 }
@@ -131,25 +132,46 @@ page {
     float: left;
     width: 120rpx;
     height: 120rpx;
-    /* overflow: hidden; */
     margin: 0 20rpx 0 0;
     position: relative;
     border: 1rpx dashed #d8d8d8;
-    box-sizing: border-box;
 }
 
 .img-box image {
     display: inline !important;
-/* 
+    /* 
     width: 100% !important;
     height: auto !important;
     display: block !important;
     overflow: visible !important;
- */
-    /* 
-    width: 100%;
-    height: 100%; 
     */
+}
+
+.uploading {
+    float: left;
+    width: 120rpx;
+    height: 120rpx;
+    border: 1rpx dashed #d8d8d8;
+    position: relative;
+    transition: all .3s linear;
+}
+
+.uploading image {
+    width: 50rpx;
+    height: 46rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.uploading.active {
+    width: 0rpx;
+    height: 0rpx;
+    opacity: 0;
+    overflow: hidden;
 }
 
 .delete-btn {
@@ -184,29 +206,4 @@ page {
     transform: rotate(-45deg);
 }
 
-.uploading {
-    float: left;
-    width: 120rpx;
-    height: 120rpx;
-    border: 1rpx dashed #d8d8d8;
-    position: relative;
-    transition: all .3s linear;
-}
 
-.uploading image {
-    width: 50rpx;
-    height: 46rpx;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-}
-
-.uploading.active {
-    width: 0rpx;
-    height: 0rpx;
-    opacity: 0;
-    overflow: hidden;
-}

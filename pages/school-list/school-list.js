@@ -25,11 +25,12 @@ Page({
     onReady: function () {
         const than = this;
         wx.getStorage({
-            key: 'schools',
+            key: 'admin',
             success: function (res) {
-                console.log(res.data, '学校列表页面!')
+                var data = JSON.parse(res.data);
+                // console.log(data.schools, '学校列表页面!')
                 than.setData({        // 设置学校列表循环数据
-                    schoolslist: JSON.parse(res.data)
+                    schoolslist: data.schools
                 })
             }
         })
@@ -80,7 +81,7 @@ Page({
      * 跳转楼栋选择页面
      */
     gochoice: function(event){
-        console.log(event);
+        // console.log('event:', event, '当前点击的学校id:' event.target.dataset.id);
         const id = event.target.dataset.id;
         // 带id参数跳转选择页面
         wx.navigateTo({

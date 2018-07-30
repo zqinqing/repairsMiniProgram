@@ -9,7 +9,7 @@
                 class="radio {{radioData.state === index?'active':''}}" 
                 data-index="{{index}}"
                 catchtap="complainttype"
-            >{{item}}</view>
+            ><text></text>{{item}}</view>
         </view>
         <textarea
             placeholder="请输入您的反馈意见"

@@ -29,7 +29,7 @@ Page({
                 title: '加载中',
                 mask: true,
             })
-        }        
+        }
         this.getUserInfo(); // 获取用户信息
     },
 
@@ -101,7 +101,7 @@ Page({
             },
             fail: function (res) {
                 console.log(res, "获取本地用户缓存失败!");
-                _this.loginCode();  // 重新登录获取用户信息
+                _this.loginCode();  // 重新登录获取用户信息            
             },
             complete: function (res) {},
         })

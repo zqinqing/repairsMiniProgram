@@ -15,6 +15,6 @@ const formatNumber = n => {
 
 module.exports = {
 	formatTime: formatTime,
-	host: "likonget.com",
-	flag: false
+	host: "likonget.com"
 }
+

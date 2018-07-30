@@ -108,7 +108,7 @@ Page({
         wx.request({
             url: than.globalData.apiUrl + 'qr/info/' + id,
             success: function (res) {
-                console.log(res, '返回数据, 二维码判断是否绑定');
+                console.log(res, '返回请求数据, 二维码判断是否绑定');
                 if (res.data.code == 0) { // 二维码已绑定
                     var school_id = res.data.data.school_id,
                         room_id = res.data.data.room_id;
@@ -116,19 +116,18 @@ Page({
                         url: '../index/index?school_id=' + school_id + '&room_id=' + room_id,
                     })
                 } else {  // 未绑定
-                    than.loginGettingData();   // 去请求判断管理员权限
-
                     wx.setStorage({
                         key: 'bind_id',
                         data: id,
-                        success: function(res) {
-                            console.log(res, '二维码扫码获取的code参数, 存储成功!');
+                        success: function (res) {
+                            // console.log(res, '二维码扫码获取的code参数, 存储成功!');
                         },
-                        fail: function(res) {
-                            console.log(res, '二维码扫码获取的code参数, 存储失败!');
+                        fail: function (res) {
+                            // console.log(res, '二维码扫码获取的code参数, 存储失败!');
                         },
-                        complete: function(res) {},
+                        complete: function (res) { },
                     })
+                    than.gainLoginInfo(); // 去请求判断管理员权限
 					/*
 					wx.redirectTo({
 						url: '../bind/bind',
@@ -138,21 +137,46 @@ Page({
         });
     },
     /**
-     * login getting data 登录
+     * 判断是否已有个人信息缓存
      */
-    loginGettingData: function(){
-        const than = this;
+    gainLoginInfo() {
+        var _this = this;
+        wx.getStorage({
+            key: 'admin',
+            complete: function (res) {
+                if (res.errMsg === "getStorage:ok") {
+                    // console.log(res, '请求成功! complete');
+                    var data = JSON.parse(res.data);
+                    // console.log(data.schools.length)
+                    if (data) { // 判断当前admin是否存在
+                        if (data.schools.length > 0) {
+                            wx.redirectTo({
+                                url: '../bindqr/bindqr'
+                            })
+                        } else {	  // 没权限 跳转到联系管理员页面
+                            wx.redirectTo({
+                                url: '../not-bound/not-bound'
+                            })
+                        }
+                    }
+                } else {
+                    console.log(res, '获取个人信息缓存失败! complete');
+                    _this.getLoginCode();
+                }
+            },
+        })
+    },
+    /**
+     * 获取微信登录code
+     */
+    getLoginCode() {
+        var _this = this;
         wx.login({
             success: function (res) {
-                console.log(res, 'login')
+                // console.log(res, 'getLoginCode')
                 if (res.errMsg === 'login:ok' && res.code !== '') {
-                    than.globalData.loginCode = res.code;
-                    console.log('登录成功!', than.globalData.loginCode)
-                    if (than.globalData.loginCode) {
-                        than.getUnionid(); // 获取unionid
-                    }
+                    _this.getUnionid(res.code);
                 }
-                // console.log(than.globalData.loginCode);
             },
             fail: function (res) {
                 console.log('login登录获取数据失败', res);
@@ -160,95 +184,73 @@ Page({
             complete: function (res) { },
         })
     },
-	/**
-	 *  获取unionid
-	 */
-	getUnionid: function(){
-		const than = this;
-		if (this.globalData.loginCode){
-			var url = this.globalData.apiUrl + "weixinweb/xiaochengcxulogin/" + this.globalData.loginCode;
-			wx.request({
-				url: url,
-				data: '',
-				header: {},
-				method: 'GET',
-				dataType: 'json',
-				responseType: 'text',
-				success: function (response) {
-                    console.log(response, 'getUnionid请求返回参数！')
-					if (response.statusCode === 200 && response.data.code === 0){
-                        console.log(response, 'unionid and openid存储')
-                        than.globalData.openid = response.data.openid;
-                        if (than.globalData.openid !== ''){
-                            than.getAdminJurisdiction(); // 获取管理员权限信息
+    /**
+     * 获取unionid
+     */
+    getUnionid(code) {
+        const _this = this;
+        if (code) {
+            var url = "https://www." + util.host + "/weixinweb/xiaochengcxulogin/" + code;
+            wx.request({
+                url: url,
+                data: '',
+                header: {},
+                method: 'GET',
+                dataType: 'json',
+                responseType: 'text',
+                success: function (response) {
+                    if (response.statusCode === 200 && response.data.code === 0) {
+                        // console.log(response, 'unionid and openid存储')
+                        if (response.data.openid !== '') {
+                            _this.getAdminJurisdiction(response.data.openid); // 获取管理员信息
                         }
-					}
-				},
-				fail: function (res) { 
-					console.log('getUnionid获取数据失败', res);
-				},
-				complete: function (res) { },
-			})
-		}
-	},
-	/**
-	 * 获取管理员权限信息 /weixinweb/loadadmininfobyunion/:unionid
-	 */
-	getAdminJurisdiction: function(){
-		const than = this;
-        if (this.globalData.openid) {
-            const url = this.globalData.apiUrl + "weixinweb/loadadmininfobyunion/" + this.globalData.openid;
-			wx.request({
-				url: url,
-				data: '',
-				header: {},
-				method: 'GET',
-				dataType: 'json',
-				responseType: 'text',
-				success: function(response) {
-					if (response.statusCode === 200 && response.data.code === 0) {
-                        var data = response.data.data;
-                        console.log(response, 'getAdminJurisdiction 获取管理员权限信息');
-                        console.log(data)
-                        if (data.schools.length > 0){  // 有权限 跳转立即绑定页面, 本地缓存id
-                            console.log('schools的长度大于零!');
-                            var schoolsData = JSON.stringify(data.schools),
-                                adminData = JSON.stringify(data);
-                            // console.log(schoolsData)
-                            wx.setStorage({  // 缓存学校列表
-                                key: "schools",
-                                data: schoolsData
-                            })
-                            wx.setStorage({  // 缓存管理员用户信息
-                                key: "admin",
-                                data: adminData
-                            })
-                            wx.getStorage({
-                                key: 'schools',
-                                success: function (res) {
-                                    console.log(res.data)
-                                    if (res.data !== ''){
-                                        wx.redirectTo({
-                                            url: '../bindqr/bindqr'
-                                        })
-                                    }
-                                }
-                            })
-						}else {							 		// 没权限 跳转到联系管理员页面
-                            wx.redirectTo({
-                                url: '../not-bound/not-bound'
-                            })
-                            /*
-                                wx.redirectTo({
-                                    url: '../scan/scan'
-                                })
-                            */
-						}
-					}
-				},
-				fail: function(res) {},
-				complete: function(res) {},
-			})
-		}
-	}
+                    }
+                },
+                fail: function (res) {
+                    console.log('getUnionid获取数据失败', res);
+                },
+                complete: function (res) { },
+            })
+        }
+    },
+    /**
+     * 
+     */
+    getAdminJurisdiction(openid) {
+        const _this = this;
+        // console.log(openid)
+        if (openid) {
+            const url = "https://www." + util.host + "/weixinweb/loadadmininfobyunion/" + openid;
+            wx.request({
+                url: url,
+                data: '',
+                header: {},
+                method: 'GET',
+                dataType: 'json',
+                responseType: 'text',
+                success: function (response) {
+                    // console.log(response, 'getAdminJurisdiction')
+                    if (response.statusCode === 200 && response.data.code === 0) {
+                        var data = response.data.data,
+                            schoolsData = JSON.stringify(data.schools),
+                            adminData = JSON.stringify(data);
+                        // console.log(schoolsData)
+                        // wx.setStorage({  // 缓存学校列表
+                        //     key: "schools",
+                        //     data: schoolsData
+                        // })
+                        wx.setStorage({  // 缓存管理员用户信息
+                            key: "admin",
+                            data: adminData,
+                            success: function () {
+                                _this.gainLoginInfo(); // 再次返回获取缓存判断去哪个页面
+                            }
+                        })
+                    }
+                },
+                fail: function (res) { },
+                complete: function (res) { },
+            })
+        }
+    },
 })

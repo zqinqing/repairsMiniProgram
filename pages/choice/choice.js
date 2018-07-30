@@ -19,7 +19,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options, '选择教室页面!');
+        // console.log(options, '选择教室页面!');
         var than = this,
             id = parseInt(options.id),
             schoolsName = '',
@@ -32,25 +32,26 @@ Page({
             console.log('网络繁忙，学校id未获取到！')
         }
         wx.getStorage({
-            key: 'schools',
+            key: 'admin',
             success: function(response) {
-                console.log(response)
+                // console.log(response)
                 if (response.errMsg === "getStorage:ok"){
-                    var data = JSON.parse(response.data);
-                    console.log(data, '获取学校本地缓存信息');
-                    data.forEach((value, index, array) => {
-                        console.log(data[index].id, id, '输出所有缓存');
-                        console.log(data[index].id === id);
-                        if (data[index].id === id){
-                            console.log('有符合的id!');
+                    var data = JSON.parse(response.data),
+                        arr = data.schools;
+                    // console.log(arr, '获取学校本地缓存信息');
+                    arr.forEach((value, index, array) => {
+                        // console.log(arr[index].id, id, '输出所有缓存');
+                        // console.log(arr[index].id === id);
+                        if (arr[index].id === id){
+                            // console.log('有符合的id!');
                             off = true;
-                            schoolsName = data[index].name;
+                            schoolsName = arr[index].name;
                             return true;
                         }
                     })
                     if (off){   // 有当前学校id
-                        console.log(id, schoolsName);
-                        wx.setNavigationBarTitle({
+                        // console.log(id, schoolsName);
+                        wx.setNavigationBarTitle({ // 设置当前页面title
                             title: schoolsName
                         });
                         than.globalData.school_id = id;
@@ -134,11 +135,11 @@ Page({
         wx.getStorage({
             key: 'admin',
             success: function (response) {
-                console.log(response, '获取成功，本地缓存的管理员信息');
+                // console.log(response, '获取成功，本地缓存的管理员信息');
                 if (response.errMsg === 'getStorage:ok') {
                     var data = JSON.parse(response.data);
                         than.globalData.infoData = data;
-                    console.log(data , '输出拿到后解析为对象的本地缓存!');
+                    // console.log(data , '输出拿到后解析为对象的本地缓存!');
                     if (data.supplier) { // 当是运维商
                         than.getOperations(); // 调用运维商获取数据接口
                         console.log('我是运营商管理员');
@@ -163,7 +164,7 @@ Page({
         if (than.globalData.infoData !== null && than.globalData.school_id !== 0) {
             var datum = than.globalData.infoData;
             var url = than.globalData.apiUrl + 'supplier/' + datum.userid + '/' + datum.session + '/' + datum.supplier_id + '/operation/loadschoolroomlist/' + than.globalData.school_id;
-            console.log(url);
+            // console.log(url);
             wx.request({
                 url: url,
                 data: '',
@@ -172,9 +173,9 @@ Page({
                 dataType: 'json',
                 responseType: 'text',
                 success: function (response) {
-                    console.log(response, '获取运维商数据接口');
+                    // console.log(response, '获取运维商数据接口');
                     if (response.statusCode === 200 && response.data.code === 0) {
-                        console.log(response, '学校获取数据接口');
+                        // console.log(response, '学校获取数据接口');
                         var arr = response.data.data;
                         arr.forEach((value, index, array) => {
                             value.state = false;
@@ -198,7 +199,7 @@ Page({
                 fail: function (res) {
                     console.log('获取运维商数据接口失败!', res);
                 },
-                complete: function (res) { },
+                complete: function (res) {},
             })
         }
     },

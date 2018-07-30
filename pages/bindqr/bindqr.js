@@ -76,26 +76,20 @@ Page({
      */
     bindqr: function(){
         wx.getStorage({
-            key: 'schools',
+            key: 'admin',
             success: function (res) {
-                console.log(res.data, '立即绑定页面')
-                var arr = JSON.parse(res.data);
-                if (arr.length > 1) { // 跳转学校列表页面
-                    console.log('schools长度大于1');
+                // console.log(res, '立即绑定页面')
+                var data = JSON.parse(res.data);
+                if (data.schools.length > 1) { // 跳转学校列表页面
+                    // console.log('schools长度大于1');
                     wx.redirectTo({
                         url: '../school-list/school-list',
                     })
-                    /*
-                    wx.navigateTo({
-                        url: ''
-                    })
-                    */
                 }else {              // 当学校列表只有1个的时候，直接跳转楼栋选择页面
-                    console.log('school长度等于1');
-                    const id = arr[0].id;
-                    // 带id参数跳转选择页面
+                    // console.log('school长度等于1');
+                    // 带返回的数据第一个学校id参数跳转选择教室绑定页面
                     wx.redirectTo({
-                        url: '../choice/choice?id=' + id
+                        url: '../choice/choice?id=' + data.schools[0].id
                     })
                 }
             }
